@@ -12,7 +12,11 @@ app.use(bodyParser.json())
 app.use('/api', userRoutes)
 
 const init = async () => {
-  await createConnection()
+  try {
+    await createConnection()
+  } catch (err) {
+    console.error(err)
+  }
 
   app.listen(PORT, () => console.log(`Server listening on ${PORT}`))
 }
