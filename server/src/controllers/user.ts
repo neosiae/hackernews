@@ -1,10 +1,11 @@
 import { Request, Response } from 'express'
 import { validationResult } from 'express-validator'
 import { getManager } from 'typeorm'
+import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import User from '../entity/User'
 
-interface IUser {
+interface IsignUp {
   username: string,
   email: string,
   password: string
@@ -19,7 +20,7 @@ export async function signUp (req: Request, res: Response) {
     })
   }
 
-  const { username, email, password }: IUser = req.body
+  const { username, email, password }: IsignUp = req.body
   const userRepository = getManager().getRepository(User)
 
   try {
@@ -54,6 +55,51 @@ export async function signUp (req: Request, res: Response) {
         message: 'User successfully created.'
       })
     } catch (err) {
+      console.error(err)
+      res.sendStatus(500)
+    }
+  } catch (err) {
+    console.error(err)
+    res.sendStatus(500)
+  }
+}
+
+interface IsignIn {
+  username: string,
+  password: string
+}
+
+export async function signIn (req: Request, res: Response) {
+  const { username, password }: IsignIn = req.body
+
+  const userRepository = getManager().getRepository(User)
+
+  try {
+    const user = await userRepository.findOne({ username })
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User doesn't exist."
+      })
+    }
+
+    try {
+      const passwordMatch = await bcrypt.compare(password, user.password)
+
+      if (!passwordMatch) {
+        return res.status(401).json({
+          message: 'Invalid username or password.'
+        })
+      }
+
+      const userId = user.id
+      const token = jwt.sign({ userId }, process.env.JWT_SECRET ?? 'dev-secret')
+
+      res.status(200).json({
+        token
+      })
+    }
+    catch (err) {
       console.error(err)
       res.sendStatus(500)
     }
