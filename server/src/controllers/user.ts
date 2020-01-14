@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import { validationResult } from 'express-validator'
 import { getManager } from 'typeorm'
 import bcrypt from 'bcryptjs'
 import User from '../entity/User'
@@ -10,6 +11,14 @@ interface IUser {
 }
 
 export async function signUp (req: Request, res: Response) {
+  const validationErrors = validationResult(req)
+
+  if (!validationErrors.isEmpty()) {
+    return res.status(422).json({
+      validationErrors: validationErrors.array()
+    })
+  }
+
   const { username, email, password }: IUser = req.body
   const userRepository = getManager().getRepository(User)
 
@@ -17,7 +26,7 @@ export async function signUp (req: Request, res: Response) {
     const existingUsername = await userRepository.findOne({ username })
     
     if (existingUsername) {
-      res.status(409).json({
+      return res.status(409).json({
         message: 'An account with this username already exists.'
       })
     }
@@ -25,7 +34,7 @@ export async function signUp (req: Request, res: Response) {
     const existingEmail = await userRepository.findOne({ email })
 
     if (existingEmail) {
-      res.status(409).json({
+      return res.status(409).json({
         message: 'An account with this email already exists.'
       })
     }
