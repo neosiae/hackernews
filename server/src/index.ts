@@ -1,8 +1,12 @@
-import "reflect-metadata"
+import 'reflect-metadata'
+import dotenv from 'dotenv'
+import path from 'path'
 import express, { Application } from 'express'
 import bodyParser from 'body-parser'
 import { createConnection } from 'typeorm'
 import userRoutes from './routes/user'
+
+dotenv.config({ path: path.resolve(__dirname, '.env' ) })
 
 const PORT: string = process.env.PORT ?? '3000'
 
