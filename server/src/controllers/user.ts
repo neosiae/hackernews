@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express'
+import { Request, Response } from 'express'
 import { getManager } from 'typeorm'
 import bcrypt from 'bcryptjs'
 import User from '../entity/User'
