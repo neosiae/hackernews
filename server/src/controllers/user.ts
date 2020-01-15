@@ -25,7 +25,7 @@ export async function signUp (req: Request, res: Response) {
 
   try {
     const existingUsername = await userRepository.findOne({ username })
-    
+
     if (existingUsername) {
       return res.status(409).json({
         message: 'An account with this username already exists.'
@@ -93,7 +93,7 @@ export async function signIn (req: Request, res: Response) {
       }
 
       const userId = user.id
-      const token = jwt.sign({ userId }, process.env.JWT_SECRET ?? 'dev-secret')
+      const token = jwt.sign({ userId }, process.env.JWT_SECRET ?? 'dev-secret', { expiresIn: '1h' })
 
       res.status(200).json({
         token
