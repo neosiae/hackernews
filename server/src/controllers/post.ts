@@ -23,9 +23,7 @@ export async function createPost (req: Request, res: Response) {
 
   try {
     const { title, url }: IPost = req.body
-    
     const currentUser = await userRepository.findOne({ id: res.locals.userId })
-
     const post = postRepository.create({ title, url, author: currentUser })
 
     try {
