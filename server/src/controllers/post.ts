@@ -47,11 +47,11 @@ export async function createPost (req: Request, res: Response) {
 export async function getPosts (req: Request, res: Response) {
   try {
     const posts = await getManager()
-    .createQueryBuilder(Post, 'post')
-    .innerJoin("post.author", "author")
-    .addSelect("author.username")
-    .orderBy("post.createdAt", "DESC")
-    .getMany()
+      .createQueryBuilder(Post, 'post')
+      .innerJoin("post.author", "author")
+      .addSelect("author.username")
+      .orderBy("post.createdAt", "DESC")
+      .getMany()
 
     res.status(200).json(posts)
   } catch (err) {
