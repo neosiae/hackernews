@@ -43,3 +43,18 @@ export async function createPost (req: Request, res: Response) {
     res.sendStatus(500)
   }
 }
+
+export async function getPosts (req: Request, res: Response) {
+  try {
+    const posts = await getManager()
+    .createQueryBuilder(Post, 'post')
+    .innerJoin("post.author", "author")
+    .addSelect("author.username")
+    .getMany()
+
+    res.status(200).json(posts)
+  } catch (err) {
+    console.error(err)
+    res.sendStatus(500)
+  }
+}
