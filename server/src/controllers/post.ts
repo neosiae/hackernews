@@ -48,9 +48,9 @@ export async function getPosts (req: Request, res: Response) {
   try {
     const posts = await getManager()
       .createQueryBuilder(Post, 'post')
-      .innerJoin("post.author", "author")
-      .addSelect("author.username")
-      .orderBy("post.createdAt", "DESC")
+      .innerJoin('post.author', 'author')
+      .addSelect('author.username')
+      .orderBy('post.createdAt', 'DESC')
       .getMany()
 
     res.status(200).json(posts)
