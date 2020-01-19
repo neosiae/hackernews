@@ -33,7 +33,7 @@ export async function vote (req: Request, res: Response) {
 
     await voteRepository.save(upvote)
 
-    const score = await getManager()
+    const points = await getManager()
       .createQueryBuilder(Vote, 'vote')
       .where('vote.post = :postId', { postId: currentPost?.id })
       .getCount()
@@ -42,7 +42,7 @@ export async function vote (req: Request, res: Response) {
       .createQueryBuilder()
       .update(Post)
       .set({
-        points: score
+        points: points
       })
       .where('id = :id', { id: currentPost?.id })
       .execute()
