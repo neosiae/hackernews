@@ -6,6 +6,7 @@ import bodyParser from 'body-parser'
 import { createConnection } from 'typeorm'
 import userRoutes from './routes/user'
 import postRoutes from './routes/post'
+import voteRoutes from './routes/vote'
 
 dotenv.config({ path: path.resolve(__dirname, '.env' ) })
 
@@ -16,6 +17,7 @@ const app: Application = express()
 app.use(bodyParser.json())
 app.use('/api', userRoutes)
 app.use('/api', postRoutes)
+app.use('/api', voteRoutes)
 
 const init = async () => {
   try {
