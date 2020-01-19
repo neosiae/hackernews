@@ -43,7 +43,8 @@ export async function getPosts (req: Request, res: Response) {
       .createQueryBuilder(Post, 'post')
       .innerJoin('post.author', 'author')
       .addSelect('author.username')
-      .orderBy('post.createdAt', 'DESC')
+      .orderBy('post.points', 'DESC')
+      .addOrderBy('post.createdAt', 'DESC')
       .getMany()
 
     res.status(200).json(posts)
