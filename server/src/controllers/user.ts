@@ -48,16 +48,11 @@ export async function signUp (req: Request, res: Response) {
     const hashedPassword = await bcrypt.hash(password, 12)
     const user = userRepository.create({ username, email, password: hashedPassword })
 
-    try {
-      await userRepository.save(user)
+    await userRepository.save(user)
 
-      res.status(201).json({
-        message: 'User successfully created.'
-      })
-    } catch (err) {
-      console.error(err)
-      res.sendStatus(500)
-    }
+    res.status(201).json({
+      message: 'User successfully created.'
+    })
   } catch (err) {
     console.error(err)
     res.sendStatus(500)
@@ -83,26 +78,20 @@ export async function signIn (req: Request, res: Response) {
       })
     }
 
-    try {
-      const passwordMatch = await bcrypt.compare(password, user.password)
+    const passwordMatch = await bcrypt.compare(password, user.password)
 
-      if (!passwordMatch) {
-        return res.status(401).json({
-          message: 'Invalid username or password.'
-        })
-      }
-
-      const userId = user.id
-      const token = jwt.sign({ userId }, process.env.JWT_SECRET ?? 'dev-secret', { expiresIn: '1h' })
-
-      res.status(200).json({
-        token
+    if (!passwordMatch) {
+      return res.status(401).json({
+        message: 'Invalid username or password.'
       })
     }
-    catch (err) {
-      console.error(err)
-      res.sendStatus(500)
-    }
+
+    const userId = user.id
+    const token = jwt.sign({ userId }, process.env.JWT_SECRET ?? 'dev-secret', { expiresIn: '1h' })
+
+    res.status(200).json({
+      token
+    })
   } catch (err) {
     console.error(err)
     res.sendStatus(500)

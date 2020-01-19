@@ -26,16 +26,11 @@ export async function createPost (req: Request, res: Response) {
     const currentUser = await userRepository.findOne({ id: res.locals.userId })
     const post = postRepository.create({ title, url, author: currentUser })
 
-    try {
-      await postRepository.save(post)
+    await postRepository.save(post)
 
-      res.status(201).json({
-        message: 'Post successfully created.'
-      })
-    } catch (err) { 
-      console.error(err)
-      res.sendStatus(500)
-    }
+    res.status(201).json({
+      message: 'Post successfully created.'
+    })
   } catch (err) {
     console.error(err)
     res.sendStatus(500)
