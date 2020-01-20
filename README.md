@@ -1,2 +1,3 @@
-# hackernews
+# Hacker News
+
 Hacker News clone

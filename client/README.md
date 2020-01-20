@@ -1,1 +1,1 @@
-# Hacker News frontend
+# Frontend
