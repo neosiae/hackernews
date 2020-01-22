@@ -5,10 +5,10 @@ import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import User from '../entity/User'
 
-interface IsignUp {
-  username: string,
-  email: string,
-  password: string
+interface SignUpTypes {
+  username: string;
+  email: string;
+  password: string;
 }
 
 export async function signUp (req: Request, res: Response) {
@@ -20,7 +20,7 @@ export async function signUp (req: Request, res: Response) {
     })
   }
 
-  const { username, email, password }: IsignUp = req.body
+  const { username, email, password }: SignUpTypes = req.body
   const userRepository = getManager().getRepository(User)
 
   try {
@@ -59,13 +59,13 @@ export async function signUp (req: Request, res: Response) {
   }
 }
 
-interface IsignIn {
-  username: string,
-  password: string
+interface SignInTypes {
+  username: string;
+  password: string;
 }
 
 export async function signIn (req: Request, res: Response) {
-  const { username, password }: IsignIn = req.body
+  const { username, password }: SignInTypes = req.body
 
   const userRepository = getManager().getRepository(User)
 

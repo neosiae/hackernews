@@ -4,9 +4,9 @@ import { getManager } from 'typeorm'
 import User from '../entity/User'
 import Post from '../entity/Post'
 
-interface IPost {
-  title: string,
-  url: string
+interface PostTypes {
+  title: string;
+  url: string;
 }
 
 export async function createPost (req: Request, res: Response) {
@@ -22,7 +22,7 @@ export async function createPost (req: Request, res: Response) {
   const postRepository = getManager().getRepository(Post)
 
   try {
-    const { title, url }: IPost = req.body
+    const { title, url }: PostTypes = req.body
     const currentUser = await userRepository.findOne({ id: res.locals.userId })
     const post = postRepository.create({ title, url, author: currentUser })
 
