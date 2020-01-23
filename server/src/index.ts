@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import path from 'path'
 import express, { Application } from 'express'
 import bodyParser from 'body-parser'
+import cors from 'cors'
 import { createConnection } from 'typeorm'
 import userRoutes from './routes/user'
 import postRoutes from './routes/post'
@@ -15,6 +16,7 @@ const PORT: string = process.env.PORT ?? '3001'
 const app: Application = express()
 
 app.use(bodyParser.json())
+app.use(cors())
 app.use('/api', userRoutes)
 app.use('/api', postRoutes)
 app.use('/api', voteRoutes)
