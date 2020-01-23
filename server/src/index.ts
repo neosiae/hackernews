@@ -10,7 +10,7 @@ import voteRoutes from './routes/vote'
 
 dotenv.config({ path: path.resolve(__dirname, '.env' ) })
 
-const PORT: string = process.env.PORT ?? '3000'
+const PORT: string = process.env.PORT ?? '3001'
 
 const app: Application = express()
 
