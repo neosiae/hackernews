@@ -43,8 +43,7 @@ export async function getPosts (req: Request, res: Response) {
       .createQueryBuilder(Post, 'post')
       .innerJoin('post.author', 'author')
       .addSelect('author.username')
-      .orderBy('post.points', 'DESC')
-      .addOrderBy('post.createdAt', 'DESC')
+      .orderBy("post.points / POW(EXTRACT(epoch from NOW() - post.createdAt) / 3600 + 2, 1.8)", 'DESC')
       .getMany()
 
     res.status(200).json(posts)
