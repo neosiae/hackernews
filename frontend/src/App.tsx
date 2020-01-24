@@ -1,9 +1,20 @@
 import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Signup from './screens/Signup'
+import './app.css'
 
-const App: React.FC = () => {
+function App () {
   return (
-    <h1>Hacker News</h1>
-  );
+    <div className='container'>
+      <Router>
+        <Switch>
+          <Route path='/signup'>
+            <Signup />
+          </Route>
+        </Switch>
+      </Router>
+    </div>
+  )
 }
 
-export default App;
+export default App
