@@ -6,8 +6,12 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  margin-left: 2rem;
-  margin-right: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  @media (min-width: 768px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 `
 
 export const Form = styled.form`
