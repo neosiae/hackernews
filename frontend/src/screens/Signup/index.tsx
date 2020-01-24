@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import fetch from 'unfetch'
@@ -19,6 +20,8 @@ const SignupSchema = Yup.object().shape({
 })
 
 export default function Signup () {
+  const history = useHistory()
+
   return (
     <S.Container>
       <h1>Sign up</h1>
@@ -38,6 +41,7 @@ export default function Signup () {
               },
               body: JSON.stringify(values)
             })
+            history.push('/login')
           } catch (err) {
             console.error(err)
           }
