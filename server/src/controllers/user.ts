@@ -82,7 +82,7 @@ export async function signIn (req: Request, res: Response) {
 
     if (!passwordMatch) {
       return res.status(401).json({
-        message: 'Invalid username or password.'
+        message: 'Incorrect password.'
       })
     }
 
