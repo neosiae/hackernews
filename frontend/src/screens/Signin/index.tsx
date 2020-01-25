@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
@@ -44,7 +44,7 @@ export default function Signin () {
               const json = await response.json()
               setServerMessage(json.message)
             }
-            
+
             if (response.ok) {
               const json = await response.json()
 
