@@ -20,3 +20,8 @@ export const Form = styled.form`
     width: 300px;
   }
 `
+
+export const ServerMessage = styled.div`
+  margin-bottom: 1rem;
+  color: #c0392b;
+`

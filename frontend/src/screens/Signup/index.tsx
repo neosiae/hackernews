@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
@@ -20,6 +20,8 @@ const SignupSchema = Yup.object().shape({
 })
 
 export default function Signup () {
+  const [serverMessage, setServerMessage] = useState('')
+
   const history = useHistory()
 
   return (
@@ -34,14 +36,22 @@ export default function Signup () {
         validationSchema={SignupSchema}
         onSubmit={async (values) => {
           try {
-            await fetch(`${process.env.REACT_APP_API}/user/signup`, {
+            const response = await fetch(`${process.env.REACT_APP_API}/user/signup`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
               },
               body: JSON.stringify(values)
             })
-            history.push('/login')
+
+            if (response.status === 409) {
+              const json = await response.json()
+              setServerMessage(json.message)
+            }
+
+            if (response.ok) {
+              history.push('/login')
+            }
           } catch (err) {
             console.error(err)
           }
@@ -55,6 +65,7 @@ export default function Signup () {
           handleSubmit
         }) => (
           <S.Form onSubmit={handleSubmit}>
+            <S.ServerMessage>{serverMessage}</S.ServerMessage>
             <Input
               type='text'
               name='username'
