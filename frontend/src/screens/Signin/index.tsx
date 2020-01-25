@@ -40,16 +40,11 @@ export default function Signin () {
               body: JSON.stringify(values)
             })
 
-            if (response.status === 401) {
+            if (response.status === 401 || response.status === 404) {
               const json = await response.json()
               setServerMessage(json.message)
             }
-
-            if (response.status === 404) {
-              const json = await response.json()
-              setServerMessage(json.message)
-            }
-
+            
             if (response.ok) {
               const json = await response.json()
 
