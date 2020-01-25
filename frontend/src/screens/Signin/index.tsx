@@ -49,7 +49,6 @@ export default function Signin () {
               const json = await response.json()
               setServerMessage(json.message)
             }
-            
 
             if (response.ok) {
               const json = await response.json()
