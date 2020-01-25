@@ -23,5 +23,10 @@ export const Form = styled.form`
 
 export const ServerMessage = styled.div`
   margin-bottom: 1rem;
+  margin-top: 1rem;
   color: #c0392b;
+`
+
+export const Title = styled.h1`
+  margin-bottom: 0;
 `

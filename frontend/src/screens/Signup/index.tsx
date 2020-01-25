@@ -26,7 +26,7 @@ export default function Signup () {
 
   return (
     <S.Container>
-      <h1>Sign up</h1>
+      <S.Title>Sign up</S.Title>
       <Formik
         initialValues={{
           username: '',
