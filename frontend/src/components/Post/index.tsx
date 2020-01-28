@@ -1,5 +1,6 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
+import fetch from 'unfetch'
 import moment from 'moment'
 import isAuthenticated from '../../utils/isAuthenticated'
 import * as S from './styles'
@@ -16,9 +17,21 @@ type Props = {
 export default function Post ({ id, title, url, points, username, createdAt }: Props) {
   const history = useHistory()
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (!isAuthenticated()) {
       history.push('/signin')
+      return
+    }
+
+    try {
+      await fetch(`${process.env.REACT_APP_API}/posts/${id}/upvote`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+    } catch (err) {
+      console.error(err)
     }
   } 
 
