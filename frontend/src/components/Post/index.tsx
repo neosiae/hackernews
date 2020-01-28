@@ -44,8 +44,8 @@ export default function Post ({ id, title, url, points, username, createdAt }: P
         </S.Link>
         <S.MetaContainer>
           <span>{points} {points === 0 || points > 1 ? 'points' : 'point'}</span>
-          {''} by <span>{username}</span>
-          {''} <span>{moment(createdAt).fromNow()}</span>
+          <span>{''} by {username}</span>
+          <span>{''} {moment(createdAt).fromNow()}</span>
         </S.MetaContainer>
       </div>
     </S.Container>
