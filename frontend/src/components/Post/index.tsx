@@ -1,6 +1,8 @@
 import React from 'react'
-import * as S from './styles'
+import { useHistory } from 'react-router-dom'
 import moment from 'moment'
+import isAuthenticated from '../../utils/isAuthenticated'
+import * as S from './styles'
 
 type Props = {
   id: number
@@ -12,9 +14,17 @@ type Props = {
 }
 
 export default function Post ({ id, title, url, points, username, createdAt }: Props) {
+  const history = useHistory()
+
+  const handleClick = () => {
+    if (!isAuthenticated()) {
+      history.push('/signin')
+    }
+  } 
+
   return (
     <S.Container>
-      <S.Upvote>&#9652;</S.Upvote>
+      <S.Upvote onClick={handleClick}>&#9652;</S.Upvote>
       <div>
         <S.Link href={url}>
           <S.Title>{title}</S.Title>

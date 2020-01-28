@@ -13,6 +13,7 @@ export const Container = styled.div`
 
 export const Upvote = styled.span`
   margin-right: 0.5rem;
+  cursor: pointer;
 `
 
 export const Title = styled.h1`

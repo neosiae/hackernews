@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import fetch from 'unfetch'
+import useHomeRedirect from '../../hooks/useHomeRedirect'
 import Input from '../../components/Input'
 import Button from '../../components/Button'
 import * as S from './styles'
@@ -20,6 +21,8 @@ export default function Signin () {
   const [serverMessage, setServerMessage] = useState('')
 
   const history = useHistory()
+
+  useHomeRedirect()
 
   return (
     <S.Container>
