@@ -32,3 +32,10 @@ export const NavLink = styled(Link)`
   color: #000;
   margin-left: 1rem;
 `
+
+export const Button = styled.button`
+  border: none;
+  background-color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+`

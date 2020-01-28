@@ -1,7 +1,17 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
+import removeToken from '../../utils/removeToken'
+import isAuthenticated from '../../utils/isAuthenticated'
 import * as S from './styles'
 
 export default function Nav () {
+  const history = useHistory()
+
+  const handleClick = () => {
+    removeToken()
+    history.push('/')
+  }
+
   return (
     <S.Nav>
       <S.Container>
@@ -9,8 +19,13 @@ export default function Nav () {
           <S.Logo to='/'>Hacker News</S.Logo>
         </div>
         <div>
-          <S.NavLink to='/signin'>Sign in</S.NavLink>
-          <S.NavLink to='/signup'>Sign up</S.NavLink>
+          {isAuthenticated() 
+            ? <S.Button onClick={handleClick}>Logout</S.Button>
+            : <div>
+                <S.NavLink to='/signin'>Sign in</S.NavLink>
+                <S.NavLink to='/signup'>Sign up</S.NavLink>
+              </div>
+          }
         </div>
       </S.Container>
     </S.Nav>
