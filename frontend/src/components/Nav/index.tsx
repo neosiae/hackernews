@@ -17,6 +17,10 @@ export default function Nav () {
       <S.Container>
         <div>
           <S.Logo to='/'>Hacker News</S.Logo>
+          {isAuthenticated()
+            ? <S.NavLink to='/submit'>Submit</S.NavLink>
+            : null
+          }
         </div>
         <div>
           {isAuthenticated() 
