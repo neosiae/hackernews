@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
@@ -11,9 +11,17 @@ export const Container = styled.div`
   border: 1px solid #dfe2e6;
 `
 
-export const Upvote = styled.span`
+type UpvoteProps = {
+  upvoted: boolean
+}
+
+export const Upvote = styled.span<UpvoteProps>`
   margin-right: 0.5rem;
   cursor: pointer;
+  color: #aaa;
+  ${props => props.upvoted && css`
+    color: #000;
+  `}
 `
 
 export const Title = styled.h1`

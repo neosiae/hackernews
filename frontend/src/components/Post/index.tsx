@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import fetch from 'unfetch'
 import moment from 'moment'
@@ -15,7 +15,27 @@ type Props = {
 }
 
 export default function Post ({ id, title, url, points, username, createdAt }: Props) {
+  const [upvote, setUpvote] = useState({ upvoted: false })
+
   const history = useHistory()
+
+  useEffect(() => {
+    const fetchVote = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_API}/posts/${id}/votes`, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        })
+        const json = await response.json()
+        setUpvote(json)
+      } catch (err) {
+        console.error(err)
+      }
+    }
+
+    fetchVote()
+  }, [id])
 
   const handleClick = async () => {
     if (!isAuthenticated()) {
@@ -33,11 +53,13 @@ export default function Post ({ id, title, url, points, username, createdAt }: P
     } catch (err) {
       console.error(err)
     }
+
+    setUpvote({ upvoted: true })
   } 
 
   return (
     <S.Container>
-      <S.Upvote onClick={handleClick}>&#9652;</S.Upvote>
+      <S.Upvote upvoted={upvote.upvoted} onClick={handleClick}>&#9652;</S.Upvote>
       <div>
         <S.Link href={url}>
           <S.Title>{title}</S.Title>
