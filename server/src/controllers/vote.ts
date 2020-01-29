@@ -4,7 +4,7 @@ import User from '../entity/User'
 import Post from '../entity/Post'
 import Vote from '../entity/Vote'
 
-export async function putVote (req: Request, res: Response) {
+export async function upvote (req: Request, res: Response) {
   const userRepository = getManager().getRepository(User)
   const postRepository = getManager().getRepository(Post)
   const voteRepository = getManager().getRepository(Vote)
