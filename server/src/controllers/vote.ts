@@ -4,7 +4,7 @@ import User from '../entity/User'
 import Post from '../entity/Post'
 import Vote from '../entity/Vote'
 
-export async function vote (req: Request, res: Response) {
+export async function putVote (req: Request, res: Response) {
   const userRepository = getManager().getRepository(User)
   const postRepository = getManager().getRepository(Post)
   const voteRepository = getManager().getRepository(Vote)
@@ -49,6 +49,39 @@ export async function vote (req: Request, res: Response) {
 
     res.status(200).json({
       message: 'Upvote successful.'
+    })
+  } catch (err) {
+    console.error(err)
+    res.sendStatus(500)
+  }
+}
+
+export async function getVote (req: Request, res: Response) {
+  const userRepository = getManager().getRepository(User)
+  const postRepository = getManager().getRepository(Post)
+
+  try {
+    const postId: any = req.params.postId
+
+    const currentPost = await postRepository.findOne({ id: postId })
+    const currentUser = await userRepository.findOne({ id: res.locals.userId })
+
+    const existingVote = await getManager()
+      .createQueryBuilder(Vote, 'vote')
+      .where(
+        'vote.author = :authorId AND vote.post = :postId', 
+        { authorId: currentUser?.id, postId: currentPost?.id }
+      )
+      .getOne()
+    
+    if (existingVote) {
+      return res.status(200).json({
+        upvoted: true
+      })
+    }
+
+    res.status(200).json({
+      upvoted: false
     })
   } catch (err) {
     console.error(err)
