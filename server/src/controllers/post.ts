@@ -37,8 +37,13 @@ export async function createPost (req: Request, res: Response) {
   }
 }
 
+interface QueryTypes {
+  page: number
+  limit: number
+}
+
 export async function getPosts (req: Request, res: Response) {
-  const { page, limit } = req.query
+  const { page, limit }: QueryTypes = req.query
 
   try {
     const posts = await getManager()
