@@ -38,12 +38,16 @@ export async function createPost (req: Request, res: Response) {
 }
 
 export async function getPosts (req: Request, res: Response) {
+  const { page, limit } = req.query
+
   try {
     const posts = await getManager()
       .createQueryBuilder(Post, 'post')
       .innerJoin('post.author', 'author')
       .addSelect('author.username')
       .orderBy('post.points / POW(EXTRACT(epoch from NOW() - post.createdAt) / 3600 + 2, 1.8)', 'DESC')
+      .offset((page - 1) * limit)
+      .limit(limit)
       .getMany()
 
     res.status(200).json(posts)
