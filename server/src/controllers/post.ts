@@ -5,8 +5,8 @@ import User from '../entity/User'
 import Post from '../entity/Post'
 
 interface PostTypes {
-  title: string;
-  url: string;
+  title: string
+  url: string
 }
 
 export async function createPost (req: Request, res: Response) {

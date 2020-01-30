@@ -6,9 +6,9 @@ import bcrypt from 'bcryptjs'
 import User from '../entity/User'
 
 interface SignUpTypes {
-  username: string;
-  email: string;
-  password: string;
+  username: string
+  email: string
+  password: string
 }
 
 export async function signUp (req: Request, res: Response) {
@@ -60,8 +60,8 @@ export async function signUp (req: Request, res: Response) {
 }
 
 interface SignInTypes {
-  username: string;
-  password: string;
+  username: string
+  password: string
 }
 
 export async function signIn (req: Request, res: Response) {
