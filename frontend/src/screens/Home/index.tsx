@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import fetch from 'unfetch'
+import useJwtExpiration from '../../hooks/useJwtExpiration'
 import Post from '../../components/Post'
 import * as S from './styles'
 
 export default function Home () {
   const [posts, setPosts] = useState<any[]>([])
+
+  useJwtExpiration()
 
   useEffect(() => {
     const fetchData = async () => {

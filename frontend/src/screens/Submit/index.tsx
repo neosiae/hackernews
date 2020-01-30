@@ -2,6 +2,7 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
+import useJwtExpiration from '../../hooks/useJwtExpiration'
 import Input from '../../components/Input'
 import Button from '../../components/Button'
 import * as S from './styles'
@@ -16,6 +17,7 @@ const SubmitSchema = Yup.object().shape({
 })
 
 export default function Submit () {
+  useJwtExpiration()
   useLoginRedirect()
 
   const history = useHistory()
