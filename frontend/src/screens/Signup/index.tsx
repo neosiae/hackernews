@@ -53,7 +53,7 @@ export default function Signup () {
             }
 
             if (response.ok) {
-              history.push('/login')
+              history.push('/signin')
             }
           } catch (err) {
             console.error(err)
