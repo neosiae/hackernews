@@ -24,21 +24,23 @@ export default function Post ({ id, title, url, points, username, createdAt }: P
   const history = useHistory()
 
   useEffect(() => {
-    const fetchVote = async (): Promise<void> => {
-      try {
-        const response = await fetch(`${process.env.REACT_APP_API}/posts/${id}/votes`, {
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-          }
-        })
-        const json = await response.json()
-        setUpvote(json)
-      } catch (err) {
-        console.error(err)
+    if (isAuthenticated()) {
+      const fetchVote = async (): Promise<void> => {
+        try {
+          const response = await fetch(`${process.env.REACT_APP_API}/posts/${id}/votes`, {
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+          })
+          const json = await response.json()
+          setUpvote(json)
+        } catch (err) {
+          console.error(err)
+        }
       }
+  
+      fetchVote()
     }
-
-    fetchVote()
   }, [id])
 
   const handleClick = async (): Promise<void> => {
