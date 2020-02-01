@@ -40,12 +40,26 @@ export async function createPost (req: Request, res: Response) {
 interface QueryTypes {
   page: number
   limit: number
+  order: string
 }
 
 export async function getPosts (req: Request, res: Response) {
-  const { page, limit }: QueryTypes = req.query
+  const { page, limit, order }: QueryTypes = req.query  
 
   try {
+    if (order === 'newest') {
+      const posts = await getManager()
+        .createQueryBuilder(Post, 'post')
+        .innerJoin('post.author', 'author')
+        .addSelect('author.username')
+        .orderBy('post.createdAt', 'DESC')
+        .offset((page - 1) * limit)
+        .limit(limit)
+        .getMany()
+      
+      return res.status(200).json(posts)
+    }
+
     const posts = await getManager()
       .createQueryBuilder(Post, 'post')
       .innerJoin('post.author', 'author')
