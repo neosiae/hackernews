@@ -18,7 +18,7 @@ const SigninSchema = Yup.object().shape({
 })
 
 export default function Signin () {
-  const [serverMessage, setServerMessage] = useState('')
+  const [serverMessage, setServerMessage] = useState<string>('')
 
   const history = useHistory()
 
@@ -33,7 +33,7 @@ export default function Signin () {
           password: ''
         }}
         validationSchema={SigninSchema}
-        onSubmit={async (values) => {
+        onSubmit={async (values): Promise<void> => {
           try {
             const response = await fetch(`${process.env.REACT_APP_API}/user/signin`, {
               method: 'POST',

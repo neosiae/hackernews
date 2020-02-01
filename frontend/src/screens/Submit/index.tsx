@@ -30,7 +30,7 @@ export default function Submit () {
           url: '',
         }}
         validationSchema={SubmitSchema}
-        onSubmit={async (values) => {
+        onSubmit={async (values): Promise<void> => {
           try {
             const response = await fetch(`${process.env.REACT_APP_API}/posts`, {
               method: 'POST',

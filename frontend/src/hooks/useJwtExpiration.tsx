@@ -7,7 +7,7 @@ interface jwt {
   exp: number
 }
 
-export default function useJwtExpiration () {
+export default function useJwtExpiration (): void {
   useEffect(() => {
     const token = localStorage.getItem('token')
     

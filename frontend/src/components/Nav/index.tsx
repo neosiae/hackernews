@@ -7,7 +7,7 @@ import * as S from './styles'
 export default function Nav () {
   const history = useHistory()
 
-  const handleClick = () => {
+  const handleClick = (): void => {
     removeToken()
     history.push('/')
   }

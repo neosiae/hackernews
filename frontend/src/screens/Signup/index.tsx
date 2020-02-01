@@ -21,7 +21,7 @@ const SignupSchema = Yup.object().shape({
 })
 
 export default function Signup () {
-  const [serverMessage, setServerMessage] = useState('')
+  const [serverMessage, setServerMessage] = useState<string>('')
 
   const history = useHistory()
 
@@ -37,7 +37,7 @@ export default function Signup () {
           password: ''
         }}
         validationSchema={SignupSchema}
-        onSubmit={async (values) => {
+        onSubmit={async (values): Promise<void> => {
           try {
             const response = await fetch(`${process.env.REACT_APP_API}/user/signup`, {
               method: 'POST',

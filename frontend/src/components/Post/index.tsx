@@ -14,13 +14,17 @@ interface Props {
   createdAt: string
 }
 
+interface Upvote {
+  upvoted: boolean
+}
+
 export default function Post ({ id, title, url, points, username, createdAt }: Props) {
-  const [upvote, setUpvote] = useState({ upvoted: false })
+  const [upvote, setUpvote] = useState<Upvote>({ upvoted: false })
 
   const history = useHistory()
 
   useEffect(() => {
-    const fetchVote = async () => {
+    const fetchVote = async (): Promise<void> => {
       try {
         const response = await fetch(`${process.env.REACT_APP_API}/posts/${id}/votes`, {
           headers: {
@@ -37,7 +41,7 @@ export default function Post ({ id, title, url, points, username, createdAt }: P
     fetchVote()
   }, [id])
 
-  const handleClick = async () => {
+  const handleClick = async (): Promise<void> => {
     if (!isAuthenticated()) {
       history.push('/signin')
       return
