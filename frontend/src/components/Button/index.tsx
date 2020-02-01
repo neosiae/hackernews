@@ -1,7 +1,7 @@
 import React from 'react'
 import * as S from './styles'
 
-type Props = {
+interface Props {
   type: 'submit' | 'reset' | 'button'
   children: React.ReactNode
 }

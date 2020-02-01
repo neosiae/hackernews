@@ -5,7 +5,7 @@ import moment from 'moment'
 import isAuthenticated from '../../utils/isAuthenticated'
 import * as S from './styles'
 
-type Props = {
+interface Props {
   id: number
   title: string
   url: string

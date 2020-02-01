@@ -1,7 +1,7 @@
 import React from 'react'
 import * as S from './styles'
 
-type Props = {
+interface Props {
   name: string
   type: string
   placeholder: string
