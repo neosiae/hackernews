@@ -51,7 +51,7 @@ export default function News () {
         />
       )}
       {posts.length !== 0
-        ? <S.More to={`/news/${Number(page) || 1 + 1}`}>More</S.More>
+        ? <S.More to={`/news/${Number(page || 1) + 1}`}>More</S.More>
         : null
       }
     </S.Container>
