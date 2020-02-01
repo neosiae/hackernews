@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Nav from './components/Nav'
-import Home from './screens/Home'
 import News from './screens/News'
 import Submit from './screens/Submit'
 import Signin from './screens/Signin'
@@ -14,7 +13,7 @@ function App () {
       <Nav />
       <Switch>
         <Route exact path='/'>
-          <Home />
+          <News />
         </Route>
         <Route path='/submit'>
           <Submit />

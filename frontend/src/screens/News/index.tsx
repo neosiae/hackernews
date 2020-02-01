@@ -26,7 +26,7 @@ export default function News () {
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API}/posts?page=${page}&limit=15`)
+        const response = await fetch(`${process.env.REACT_APP_API}/posts?page=${page || 1}&limit=15`)
         const json = await response.json()
         setPosts(json)
       } catch (err) {
@@ -51,7 +51,7 @@ export default function News () {
         />
       )}
       {posts.length !== 0
-        ? <S.More to={`/news/${Number(page) + 1}`}>More</S.More>
+        ? <S.More to={`/news/${Number(page) || 1 + 1}`}>More</S.More>
         : null
       }
     </S.Container>
