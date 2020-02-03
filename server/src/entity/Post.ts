@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany, ManyToOne } from 'typeorm'
 import User from './User'
+import Vote from './Vote'
 
 @Entity()
 export default class Post {
@@ -18,6 +19,9 @@ export default class Post {
   @CreateDateColumn()
   createdAt: Date
 
-  @ManyToOne(type => User)
+  @ManyToOne(type => User, user => user.posts)
   author: User
+
+  @OneToMany(type => Vote, vote => vote.post)
+  votes: Vote[]
 }

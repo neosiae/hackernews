@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm'
+import Post from './Post'
+import Vote from './Vote'
 
 @Entity()
 export default class User {
@@ -13,4 +15,10 @@ export default class User {
 
   @Column()
   password: string
+
+  @OneToMany(type => Post, post => post.author)
+  posts: Post[]
+
+  @OneToMany(type => Vote, vote => vote.author)
+  votes: Vote[]
 }
