@@ -10,6 +10,7 @@ interface Props {
   title: string
   url: string
   points: number
+  commentsNumber: number
   username: string
   createdAt: string
 }
@@ -18,7 +19,7 @@ interface Upvote {
   upvoted: boolean
 }
 
-export default function Post ({ id, title, url, points, username, createdAt }: Props) {
+export default function Post ({ id, title, url, points, commentsNumber, username, createdAt }: Props) {
   const [upvote, setUpvote] = useState<Upvote>({ upvoted: false })
 
   const history = useHistory()
@@ -74,6 +75,7 @@ export default function Post ({ id, title, url, points, username, createdAt }: P
           <span>{points} {points === 0 || points > 1 ? 'points' : 'point'}</span>
           <span>{''} by {username}</span>
           <span>{''} {moment(createdAt).fromNow()}</span>
+          <span>{''} | {''} {commentsNumber} {commentsNumber === 0 || commentsNumber > 1 ? 'comments' : 'comment'}</span>
         </S.MetaContainer>
       </div>
     </S.Container>

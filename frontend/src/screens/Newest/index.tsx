@@ -10,6 +10,7 @@ interface Post {
   title: string
   url: string
   points: number
+  commentsNumber: number
   author: {
     username: string
   }
@@ -46,6 +47,7 @@ export default function Newest () {
           title={post.title}
           url={post.url}
           points={post.points}
+          commentsNumber={post.commentsNumber}
           username={post.author.username}
           createdAt={post.createdAt}
         />
