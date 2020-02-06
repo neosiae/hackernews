@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Nav from './components/Nav'
 import News from './screens/News'
 import Newest from './screens/Newest'
+import SinglePost from './screens/SinglePost'
 import Submit from './screens/Submit'
 import Signin from './screens/Signin'
 import Signup from './screens/Signup'
@@ -30,6 +31,9 @@ function App () {
         </Route>
         <Route path='/newest/:page'>
           <Newest />
+        </Route>
+        <Route path='/posts/:id'>
+          <SinglePost />
         </Route>
       </Switch>
     </Router>

@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { Link } from 'react-router-dom'
 
 export const Container = styled.div`
   display: flex;
@@ -30,11 +31,20 @@ export const Title = styled.h1`
   margin-bottom: 0;
 `
 
-export const Link = styled.a`
+export const AnchorLink = styled.a`
   text-decoration: none;
   color: #000;
 `
 
 export const MetaContainer = styled.div`
   font-size: 0.8rem;
+  color: #828282;
+`
+
+export const RouterLink = styled(Link)`
+  color: #828282;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
 `

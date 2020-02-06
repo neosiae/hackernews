@@ -68,14 +68,17 @@ export default function Post ({ id, title, url, points, commentsNumber, username
     <S.Container>
       <S.Upvote upvoted={upvote.upvoted} onClick={handleClick}>&#9652;</S.Upvote>
       <div>
-        <S.Link href={url}>
+        <S.AnchorLink href={url}>
           <S.Title>{title}</S.Title>
-        </S.Link>
+        </S.AnchorLink>
         <S.MetaContainer>
           <span>{points} {points === 0 || points > 1 ? 'points' : 'point'}</span>
           <span>{''} by {username}</span>
           <span>{''} {moment(createdAt).fromNow()}</span>
-          <span>{''} | {''} {commentsNumber} {commentsNumber === 0 || commentsNumber > 1 ? 'comments' : 'comment'}</span>
+          <span>
+            {''} |
+            {''} <S.RouterLink to={`/posts/${id}`}>{commentsNumber} {commentsNumber === 0 || commentsNumber > 1 ? 'comments' : 'comment'}</S.RouterLink>
+          </span>
         </S.MetaContainer>
       </div>
     </S.Container>
