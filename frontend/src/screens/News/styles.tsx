@@ -19,5 +19,5 @@ export const More = styled(Link)`
   padding-bottom: 1rem;
   color: #000;
   display: inline-block;
-  margin-top: 2rem;
+  margin-top: 1rem;
 `
