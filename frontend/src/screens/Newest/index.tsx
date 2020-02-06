@@ -50,7 +50,7 @@ export default function Newest () {
           createdAt={post.createdAt}
         />
       )}
-      {posts.length !== 0
+      {posts.length >= 15
         ? <S.More to={`/newest/${Number(page || 1) + 1}`}>More</S.More>
         : null
       }
