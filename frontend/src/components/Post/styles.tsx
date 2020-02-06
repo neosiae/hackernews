@@ -5,10 +5,7 @@ export const Container = styled.div`
   align-items: center;
   background-color: #fff;
   padding: 1rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 4px;
-  border: 1px solid #dfe2e6;
+  border-bottom: 1px solid #eee;
 `
 
 type UpvoteProps = {
@@ -19,6 +16,9 @@ export const Upvote = styled.span<UpvoteProps>`
   margin-right: 0.5rem;
   cursor: pointer;
   color: #aaa;
+  &:hover {
+    color: #000;
+  }
   ${props => props.upvoted && css`
     color: #000;
   `}
