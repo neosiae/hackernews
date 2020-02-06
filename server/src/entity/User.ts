@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm'
 import Post from './Post'
 import Vote from './Vote'
+import Comment from './Comment'
 
 @Entity()
 export default class User {
@@ -21,4 +22,7 @@ export default class User {
 
   @OneToMany(type => Vote, vote => vote.author)
   votes: Vote[]
+
+  @OneToMany(type => Comment, comment => comment.author)
+  comments: Comment[]
 }
