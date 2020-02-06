@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { check } from 'express-validator'
-import { createPost, getPosts } from '../controllers/post'
+import { createPost, getPosts, getPost } from '../controllers/post'
 import auth from '../middleware/auth'
 
 const router: Router = Router()
@@ -11,5 +11,7 @@ router.post('/posts', [
 ], auth, createPost)
 
 router.get('/posts', getPosts)
+
+router.get('/posts/:postId', getPost)
 
 export default router

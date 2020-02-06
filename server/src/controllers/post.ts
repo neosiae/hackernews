@@ -75,3 +75,21 @@ export async function getPosts (req: Request, res: Response) {
     res.sendStatus(500)
   }
 }
+
+export async function getPost (req: Request, res: Response) {
+  const postId = req.params.postId
+
+  try {
+    const post = await getManager()
+      .createQueryBuilder(Post, 'post')
+      .innerJoin('post.author', 'author')
+      .addSelect('author.username')
+      .where('post.id = :postId', { postId: postId })
+      .getOne()
+    
+    res.status(200).json(post)
+  } catch (err) {
+    console.error(err)
+    res.sendStatus(500)
+  }
+}
