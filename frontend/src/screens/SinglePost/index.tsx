@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import fetch from 'unfetch'
 import Post from '../../components/Post'
 import Comment from '../../components/Comment'
+import CommentArea from '../../components/CommentArea'
 import * as S from './styles'
 
 interface PostTypes {
@@ -59,8 +60,6 @@ export default function SinglePost () {
 
     fetchComments()
   }, [id])
-
-  console.log(comments)
  
   return (
     <S.Container>
@@ -75,6 +74,7 @@ export default function SinglePost () {
           createdAt={post.createdAt}
         />
       }
+      <CommentArea id={id} />
       {comments.map(comment =>
         <Comment
           key={comment.id}
