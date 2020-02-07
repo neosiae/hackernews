@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import fetch from 'unfetch'
+import isAuthenticated from '../../utils/isAuthenticated'
 import Button from '../Button'
 import * as S from './styles'
 
@@ -33,15 +34,20 @@ export default function CommentArea ({ id }: Props) {
   }
 
   return (
-    <S.Container>
-      <S.TextArea
-        name='text'
-        onChange={handleChange}
-        value={text}
-      />
-      <S.ButtonContainer>
-        <Button onClick={handleClick}>Add Comment</Button>
-      </S.ButtonContainer>
-    </S.Container>
+    <>
+      {isAuthenticated()
+        ? <S.Container>
+            <S.TextArea
+              name='text'
+              onChange={handleChange}
+              value={text}
+            />
+            <S.ButtonContainer>
+              <Button onClick={handleClick}>Add Comment</Button>
+            </S.ButtonContainer>
+          </S.Container>
+        : null
+      }
+    </>
   )
 }
