@@ -14,7 +14,7 @@ export default function CommentArea ({ id }: Props) {
     setText(event.target.value)
   }
 
-  const handleClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = async (event: React.MouseEvent<HTMLButtonElement>): Promise<void> => {
     try {
       await fetch(`${process.env.REACT_APP_API}/posts/${id}/comments`, {
         method: 'POST',
