@@ -77,7 +77,7 @@ export async function getPosts (req: Request, res: Response) {
 }
 
 export async function getPost (req: Request, res: Response) {
-  const postId = req.params.postId
+  const postId: any = req.params.postId
 
   try {
     const post = await getManager()
